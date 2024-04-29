@@ -4,9 +4,8 @@ import datetime as dt
 import smtplib
 import random
 
-
-# for information you can chose any provider (outlook, gmail, yahoo) just don't forget to change the SMTP host in line 40
 file = "birthdays.csv"
+# for information you can chose any provider (outlook, gmail, yahoo) just don't forget to change the SMTP host in line 40
 my_email = "put_the_eamil_that_sends_the_message_here@gmail.com"
 password = "your_emails_password"
 
@@ -27,9 +26,9 @@ birthday_data = birthdays[(birthdays.month == today_month) & (birthdays.day == t
 
 # 3. If step 2 is true, pick a random letter from letter templates and replace the [NAME] with the person's actual name from birthdays.csv
 def create_letter():
-    letters_lists = ["letter_templates/letter_1.txt", "letter_templates/letter_2.txt","letter_templates/letter_3.txt" ]
-    chose_letter = random.choice(letters_lists)
-    with open(chose_letter, mode="r") as file_letter :
+    letters_lists = f"letter_templates/letter_{random.randint(1,3)}.txt"
+    # chose_letter = random.choice(letters_lists)
+    with open(letters_lists, mode="r") as file_letter :
         letter = file_letter.read()
         name = birthday_data["name"].iloc[0]
         new_letter = letter.replace("[NAME]", f"{name}")
